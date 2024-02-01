@@ -69,4 +69,20 @@ class NoteRepository(context: Context){
         db.close()
         return notes
     }
+    fun getNoteById(id:Long):Note {
+        var title=""
+        var content=""
+        val db=dbHelper.readableDatabase
+        val cursor=db.rawQuery("SELECT * FROM ${NotesDBHelper.TABLE_NAME} WHERE ${NotesDBHelper.COLUMN_ID} = $id",null)
+        with(cursor){
+            while (moveToNext()){
+                title=getString(getColumnIndexOrThrow(NotesDBHelper.COLUMN_TITLE))
+                content=getString(getColumnIndexOrThrow(NotesDBHelper.COLUMN_CONTENT))
+            }
+        }
+        val notes=Note(id,title,content)
+        cursor.close()
+        db.close()
+        return notes
+    }
 }

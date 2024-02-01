@@ -42,7 +42,14 @@ class NotesFragment : Fragment() {
         recyclerNotes?.layoutManager =LinearLayoutManager(requireContext())
         val noteRepository=NoteRepository(requireContext())
         val notes=noteRepository.getAllNotes()
-        noteAdapter= NoteAdapter(notes)
+        noteAdapter= NoteAdapter(notes,onItemClick = {clickedNote ->
+            val intent=Intent(requireContext(),EditNote::class.java)
+            intent.putExtra("noteId",clickedNote.id)
+            startActivity(intent)
+        }, onDeleteClick = {clickedNote ->
+            Toast.makeText(requireContext(),"This Feature will be added Soon",Toast.LENGTH_SHORT).show()
+        })
+
         recyclerNotes?.adapter=noteAdapter
         val fabAddNote:ExtendedFloatingActionButton=view.findViewById(R.id.fabAddNote)
         fabAddNote.setOnClickListener(){
