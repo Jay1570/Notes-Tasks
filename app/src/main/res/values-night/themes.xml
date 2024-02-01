@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NotesTask" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+    <style name="AppTheme.Overlay" parent="ThemeOverlay.Material3.DynamicColors.Dark" >
+    </style>
+</resources>
