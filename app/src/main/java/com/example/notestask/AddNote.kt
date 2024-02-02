@@ -25,7 +25,7 @@ class AddNote : AppCompatActivity() {
                 if (newNoteId != -1L) {
                     Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this,MainActivity::class.java))
-                    finish()
+                    finishAffinity()
                 }
             }
             else{
