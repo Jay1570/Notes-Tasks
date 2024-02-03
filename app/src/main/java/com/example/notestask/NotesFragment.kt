@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.neverEqualPolicy
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +43,16 @@ class NotesFragment : Fragment() {
             val intent=Intent(requireContext(),AddNote::class.java)
             startActivity(intent)
         }
+        recyclerNotes?.addOnScrollListener(object:RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy>0&&fabAddNote.isExtended){
+                    fabAddNote.shrink()
+                }else if(dy<0&&!fabAddNote.isExtended){
+                    fabAddNote.extend()
+                }
+            }
+        })
         return view
     }
     @SuppressLint("NotifyDataSetChanged")
